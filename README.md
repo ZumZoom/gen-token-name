@@ -4,7 +4,9 @@ Genereate token names from templates and check their avaliability on coinmarketc
 
 ## Installing
 
+```
 pip install -r requirements.txt
+```
 
 ## Run
 
