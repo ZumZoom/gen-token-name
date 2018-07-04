@@ -21,4 +21,5 @@ python gen_token_names.py ET* AB *S*
 ```
 
 Algorithm will check all available symbols in place of *.
+
 It will also extend the string to 3 symbols in all possible ways.
