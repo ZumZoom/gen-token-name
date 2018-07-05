@@ -108,8 +108,8 @@ def main():
                 if check(word) and len(word) in [3, 4] and word not in cmc_symbol_dict and word not in mew_symbol_dict:
                     acceptable_words.add(word)
 
-    with Pool(64) as p:
-        tickers = p.imap(list_tokens_on_etherscan, acceptable_words, 32)
+    with Pool(4) as p:
+        tickers = p.imap(list_tokens_on_etherscan, acceptable_words)
 
     tickers = {k: v for k, v in zip(acceptable_words, tickers)}
 
