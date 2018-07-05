@@ -3,6 +3,7 @@ import sys
 from typing import Iterator
 from string import ascii_uppercase
 import requests
+from multiprocessing.pool import ThreadPool as Pool
 
 
 CMC_FILE = 'coinmarketcap.json'
@@ -106,7 +107,10 @@ def main():
                 if check(word) and len(word) in [3, 4] and word not in cmc_symbol_dict and word not in mew_symbol_dict:
                     acceptable_words.add(word)
 
-    tickers = {name: list_tokens_on_etherscan(name) for name in acceptable_words}
+    with Pool(64) as p:
+        tickers = p.imap(list_tokens_on_etherscan, acceptable_words, 32)
+
+    tickers = {k: v for k, v in zip(acceptable_words, tickers)}
 
     for ticker, tokens in sorted(tickers.items(), key=lambda x: (len(x[1]), x[0])):
         print('{};{};{}'.format(ticker, len(tokens), tokens or ''))
