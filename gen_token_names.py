@@ -8,6 +8,7 @@ from multiprocessing.pool import ThreadPool as Pool
 
 CMC_FILE = 'coinmarketcap.json'
 MYCRYPTO_FILE = 'mycrypto.json'
+TICKER_LENGTH = 3
 
 
 def get_cmc_file():
@@ -44,7 +45,7 @@ def gen_names(pattern: str) -> Iterator[str]:
 
 
 def gen_partial_template(partial_template: str) -> Iterator[str]:
-    if len(partial_template) == 3:
+    if len(partial_template) == TICKER_LENGTH:
         yield from gen_names(partial_template)
     else:
         for i in range(len(partial_template) + 1):
