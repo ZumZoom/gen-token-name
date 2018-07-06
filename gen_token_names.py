@@ -120,7 +120,7 @@ def main():
     tickers = {k: v for k, v in zip(acceptable_words, tickers)}
 
     for ticker, tokens in sorted(tickers.items(), key=lambda x: (len(x[1]), x[0])):
-        print(encode_decode('{};{};{}'.format(ticker, len(tokens), tokens or ''))
+        print(encode_decode('{};{};{}'.format(ticker, len(tokens), tokens or '')))
 
 
 if __name__ == '__main__':
